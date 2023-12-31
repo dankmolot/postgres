@@ -14,58 +14,56 @@ jobs:
         uses: actions/checkout@v4
 
       - uses: ilammy/msvc-dev-cmd@v1
+
+      - run: mkdir output
       
       - name: Build x64 Release
         run: |
           perl src/tools/msvc/build.pl Release libpq
+          Copy-Item -Path Release/libpq/libpq.lib,Release/libpgcommon/libpgcommon.lib,Release/libpgport/libpgport.lib -Destination output
 
       - uses: actions/upload-artifact@v4
         with:
           name: libpq-win64-release
-          path: |
-            Release/libpq/libpq.lib
-            Release/libpgcommon/libpgcommon.lib
-            Release/libpgport/libpgport.lib
+          path: output/*.lib
 
       - name: Build x64 Debug
         run: |
           src/tools/msvc/clean.bat
           perl src/tools/msvc/build.pl Debug libpq
+          Copy-Item -Path Debug/libpq/libpq.lib,Debug/libpgcommon/libpgcommon.lib,Debug/libpgport/libpgport.lib -Destination output
 
       - uses: actions/upload-artifact@v4
         with:
           name: libpq-win64-debug
-          path: |
-            Debug/libpq/libpq.lib
-            Debug/libpgcommon/libpgcommon.lib
-            Debug/libpgport/libpgport.lib
+          path: output/*.lib
 
-      - name: Build x32 Release
-        run: |
-          src/tools/msvc/clean.bat
-          $env:BUILD_PLATFORM = "Win32"
-          $env:MSBFLAGS = "/p:Platform=Win32"
-          perl src/tools/msvc/build.pl Release libpq
+      # - name: Build x32 Release
+      #   run: |
+      #     src/tools/msvc/clean.bat
+      #     $env:BUILD_PLATFORM = "Win32"
+      #     $env:MSBFLAGS = "/p:Platform=Win32"
+      #     perl src/tools/msvc/build.pl Release libpq
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: libpq-win32-release
-          path: |
-            Release/libpq/libpq.lib
-            Release/libpgcommon/libpgcommon.lib
-            Release/libpgport/libpgport.lib
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: libpq-win32-release
+      #     path: |
+      #       Release/libpq/libpq.lib
+      #       Release/libpgcommon/libpgcommon.lib
+      #       Release/libpgport/libpgport.lib
 
-      - name: Build x32 Debug
-        run: |
-          src/tools/msvc/clean.bat
-          $env:BUILD_PLATFORM = "Win32"
-          $env:MSBFLAGS = "/p:Platform=Win32"
-          perl src/tools/msvc/build.pl Debug libpq
+      # - name: Build x32 Debug
+      #   run: |
+      #     src/tools/msvc/clean.bat
+      #     $env:BUILD_PLATFORM = "Win32"
+      #     $env:MSBFLAGS = "/p:Platform=Win32"
+      #     perl src/tools/msvc/build.pl Debug libpq
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: libpq-win32-debug
-          path: |
-            Debug/libpq/libpq.lib
-            Debug/libpgcommon/libpgcommon.lib
-            Debug/libpgport/libpgport.lib
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: libpq-win32-debug
+      #     path: |
+      #       Debug/libpq/libpq.lib
+      #       Debug/libpgcommon/libpgcommon.lib
+      #       Debug/libpgport/libpgport.lib
