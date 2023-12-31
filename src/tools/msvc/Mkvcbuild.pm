@@ -254,7 +254,7 @@ sub mkvcbuild
 		  unless $found;
 	}
 
-	$libpq = $solution->AddProject('libpq', 'dll', 'interfaces',
+	$libpq = $solution->AddProject('libpq', 'lib', 'interfaces',
 		'src/interfaces/libpq');
 	$libpq->AddDefine('FRONTEND');
 	$libpq->AddDefine('UNSAFE_STAT_OK');
