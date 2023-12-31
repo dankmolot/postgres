@@ -15,7 +15,8 @@ jobs:
       
       - name: Configure
         run: |
-          autoconf
+          cd src/tools/msvc
+          perl build.pl Release libpq
       
       - name: Tree
         run: tree /f /a
