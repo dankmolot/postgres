@@ -43,7 +43,7 @@ jobs:
       - name: Build x32 Release
         run: |
           src/tools/msvc/clean.bat
-          set BUILD_PLATFORM=Win32
+          $env:BUILD_PLATFORM = "Win32"
           perl src/tools/msvc/build.pl Release libpq
 
       - uses: actions/upload-artifact@v4
