@@ -1,0 +1,21 @@
+name: 'Build static libpq'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - github-actions
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Configure
+        run: |
+          autoconf
+      
+      - name: Tree
+        run: tree /f /a
