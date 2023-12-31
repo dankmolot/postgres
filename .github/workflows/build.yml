@@ -54,3 +54,18 @@ jobs:
             Release/libpq/libpq.lib
             Release/libpgcommon/libpgcommon.lib
             Release/libpgport/libpgport.lib
+
+      - name: Build x32 Debug
+        run: |
+          src/tools/msvc/clean.bat
+          $env:BUILD_PLATFORM = "Win32"
+          $env:MSBFLAGS = "/p:Platform=Win32"
+          perl src/tools/msvc/build.pl Debug libpq
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: libpq-win32-debug
+          path: |
+            Debug/libpq/libpq.lib
+            Debug/libpgcommon/libpgcommon.lib
+            Debug/libpgport/libpgport.lib
