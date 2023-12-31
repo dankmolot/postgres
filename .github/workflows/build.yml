@@ -27,7 +27,7 @@ jobs:
 
       - name: Copy output
         run: |
-          Get-ChildItem -Path ${{matrix.configuration}}/* -Include *.lib,*.pdb -Recurse | Copy-Item -Destination output
+          (Get-ChildItem -Path ${{matrix.configuration}}/* -Include *.lib,*.pdb -Recurse).FullName
 
       - uses: actions/upload-artifact@v4
         with:
