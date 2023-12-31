@@ -50,6 +50,6 @@ jobs:
         with:
           name: libpq-win32-release
           path: |
-            Debug/libpq/libpq.lib
-            Debug/libpgcommon/libpgcommon.lib
-            Debug/libpgport/libpgport.lib
+            Release/libpq/libpq.lib
+            Release/libpgcommon/libpgcommon.lib
+            Release/libpgport/libpgport.lib
