@@ -69,6 +69,11 @@ sub DeterminePlatform
 		$? >> 8 == 0 or die "cl command not found";
 		$self->{platform} =
 		  ($output =~ /^\/favor:<.+AMD64/m) ? 'x64' : 'Win32';
+
+        if (defined($ENV{BUILD_PLATFORM}))
+        {
+            $self->{platform} = $ENV{BUILD_PLATFORM};
+        }
 	}
 	else
 	{
