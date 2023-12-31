@@ -27,13 +27,12 @@ jobs:
 
       - name: Copy output
         run: |
-          Get-ChildItem -Path ${{matrix.configuration}}/* -Include *.lib,*.pdb -Recurse | Copy-Item -Destination output -WhatIf
-          tree /f /a output
+          Get-ChildItem -Path ${{matrix.configuration}}/* -Include *.lib,*.pdb -Recurse | Copy-Item -Destination output
 
       - uses: actions/upload-artifact@v4
         with:
           name: libpq-${{matrix.platform}}-${{matrix.configuration}}
           retention-days: 1
-          path: 
+          path: |
             output/*.lib
             output/*.pdb
