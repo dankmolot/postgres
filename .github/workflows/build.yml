@@ -21,4 +21,4 @@ jobs:
           perl build.pl Release libpq
       
       - name: Tree
-        run: tree /f /a
+        run: tree /f /a Release
