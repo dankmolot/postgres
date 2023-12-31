@@ -24,9 +24,11 @@ jobs:
           perl src/tools/msvc/build.pl ${{ matrix.configuration }} libpq
           $env:BUILD_PLATFORM = "${{ matrix.platform }}"
           $env:MSBFLAGS = "/p:Platform=${{ matrix.platform }}"
-          Copy-Item -Path ${{matrix.configuration}}/libpq/libpq.lib,${{matrix.configuration}}/libpgcommon/libpgcommon.lib,${{matrix.configuration}}/libpgport/libpgport.lib -Destination output
+          Copy-Item -Path ${{matrix.configuration}}/libpq/libpq.*,${{matrix.configuration}}/libpgcommon/libpgcommon.*,${{matrix.configuration}}/libpgport/libpgport.* -Destination output
 
       - uses: actions/upload-artifact@v4
         with:
           name: libpq-${{matrix.platform}}-${{matrix.configuration}}
-          path: output/*.lib
+          path: 
+            output/*.lib
+            output/*.pdb
