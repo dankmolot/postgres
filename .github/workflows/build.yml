@@ -18,7 +18,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
       - run: mkdir output
-      - run: |
+
+      - name: Write config.pl
+        run: |
           New-Item src/tools/msvc/config.pl -Value @"
           # Copyright (c) 2021-2022, PostgreSQL Global Development Group
 
@@ -52,8 +54,6 @@ jobs:
 
           1;
           "@
-
-      - run: gc src/tools/msvc/config.pl
       
       - name: Configure & Build
         run: |
