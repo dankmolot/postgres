@@ -15,10 +15,27 @@ jobs:
 
       - uses: ilammy/msvc-dev-cmd@v1
       
-      - name: Configure
+      - name: Build x64 Release
         run: |
-          cd src/tools/msvc
-          perl build.pl Release libpq
-      
-      - name: Tree
-        run: tree /f /a Release
+          perl src/tools/msvc/build.pl Release libpq
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: libpq-win64-release
+          path: |
+            Release/libpq/libpq.lib
+            Release/libpgcommon/libpgcommon.lib
+            Release/libpgport/libpgport.lib
+
+      - name: Build x64 Debug
+        run: |
+          src/tools/msvc/clean.bat
+          perl src/tools/msvc/build.pl Debug libpq
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: libpq-win64-debug
+          path: |
+            Debug/libpq/libpq.lib
+            Debug/libpgcommon/libpgcommon.lib
+            Debug/libpgport/libpgport.lib
