@@ -50,6 +50,7 @@ elsif (-e "./buildenv.pl")
 # set up the project
 our $config;
 do "./src/tools/msvc/config_default.pl";
+if (-f "src/tools/msvc/config.pl") { print "src/tools/msvc/config.pl"; } elsif (-f "./src/tools/msvc/config.pl") { print "./src/tools/msvc/config.pl"; } else { print "no config.pl"; }
 do "./src/tools/msvc/config.pl" if (-f "src/tools/msvc/config.pl");
 
 print Dumper($config);
