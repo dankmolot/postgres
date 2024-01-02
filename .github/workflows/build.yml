@@ -23,6 +23,7 @@ jobs:
         run: |
           New-Item src/tools/msvc/config.pl -Value @"
           $config->{'ldap'} = 0;
+          print "LDAP support disabled\n";
           "@
       
       - name: Configure & Build
