@@ -21,10 +21,7 @@ jobs:
 
       - name: Write config.pl
         run: |
-          New-Item src/tools/msvc/config.pl -Value @"
-          $config->{'ldap'} = 0;
-          print "LDAP support disabled\n";
-          "@
+          New-Item src/tools/msvc/config.pl -Value 'print "hello world!";'
       
       - name: Configure & Build
         run: |
