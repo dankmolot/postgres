@@ -12,7 +12,6 @@ use warnings;
 
 use FindBin;
 use lib $FindBin::RealBin;
-use Data::Dumper;
 
 use Cwd;
 
@@ -50,10 +49,7 @@ elsif (-e "./buildenv.pl")
 # set up the project
 our $config;
 do "./src/tools/msvc/config_default.pl";
-do "./src/tools/msvc/config.pl";
 do "./src/tools/msvc/config.pl" if (-f "src/tools/msvc/config.pl");
-
-print Dumper($config);
 
 my $vcver = Mkvcbuild::mkvcbuild($config);
 
