@@ -10,7 +10,7 @@ our $config = {
 
 	# blocksize => 8,         # --with-blocksize, 8kB by default
 	# wal_blocksize => 8,     # --with-wal-blocksize, 8kB by default
-	ldap      => 0,        # --with-ldap
+	ldap      => 1,        # --with-ldap
 	extraver  => undef,    # --with-extra-version=<string>
 	gss       => undef,    # --with-gssapi=<path>
 	icu       => undef,    # --with-icu=<path>
