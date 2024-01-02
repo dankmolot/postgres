@@ -22,7 +22,7 @@ jobs:
       - name: Write config.pl
         run: |
           New-Item src/tools/msvc/config.pl -Value @"
-          $config->{ldap} = 0;
+          $config->{'ldap'} = 0;
           "@
       
       - name: Configure & Build
