@@ -21,7 +21,7 @@ jobs:
 
       - name: Write config.pl
         run: |
-          New-Item src/tools/msvc/config.pl -Value 'print "hello world!";'
+          New-Item src/tools/msvc/config.pl -Value '$config->{ldap} = 0;'
       
       - name: Configure & Build
         run: |
