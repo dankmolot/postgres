@@ -20,18 +20,16 @@ jobs:
       - run: mkdir output
 
       - name: Write config.pl
-        run: |
-          New-Item src/tools/msvc/config.pl -Value '$config->{ldap} = 0;'
+        run: New-Item src/tools/msvc/config.pl -Value '$config->{ldap} = 0;'
       
       - name: Configure & Build
-        run: |
-          perl src/tools/msvc/build.pl ${{ matrix.configuration }} libpq
-          $env:BUILD_PLATFORM = "${{ matrix.platform }}"
-          $env:MSBFLAGS = "/p:Platform=${{ matrix.platform }}"
+        env:
+          BUILD_PLATFORM: ${{ matrix.platform }}
+          MSBFLAGS: /p:Platform=${{ matrix.platform }}
+        run: perl src/tools/msvc/build.pl ${{ matrix.configuration }} libpq
 
       - name: Copy output
-        run: |
-          Get-ChildItem -Path ${{matrix.configuration}}/* -Include *.lib,*.pdb -Recurse | Copy-Item -Destination output
+        run: Get-ChildItem -Path ${{matrix.configuration}}/* -Include *.lib,*.pdb -Recurse | Copy-Item -Destination output
 
       - uses: actions/upload-artifact@v4
         with:
